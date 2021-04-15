@@ -1,9 +1,6 @@
-import React, { useState, useContext } from "react";
-import { AppContext } from '../App'
-import { v4 as generateId } from 'uuid'
+import React, { useState } from "react";
 
 const AddTransaction = () => {
-  const { bills, setBills } = useContext(AppContext)
 
   const [input, setInput] = useState({
     number: "",
@@ -21,7 +18,6 @@ const AddTransaction = () => {
     e.preventDefault()
     // setInputValue(input)
     console.log(input, 'nput')
-    setBills([ ...bills, {...input, id: generateId()} ])
   }
   return (
     <>
