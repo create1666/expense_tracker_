@@ -4,11 +4,13 @@ import "./App.css";
 import Header from "./components/Header";
 import Balance from "./components/Balance";
 import TransactionList from "./components/TransactionList";
-import AddTransaction from "./components/AddTransaction";
+// import AddTransaction from "./components/AddTransaction";
 import IncomeExpenses from "./components/IncomeExpenses";
-
+import FormAddTransaction from "./components/AddTransaction"
 
 function App() {
+
+    
   return (
     <>
       <Header />
@@ -16,7 +18,7 @@ function App() {
         <Balance />
         <IncomeExpenses />
         <TransactionList />
-        <AddTransaction />
+        <FormAddTransaction />
       </div>
     </>
   );

@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 
-const AddTransaction = () => {
+const FormAddTransaction = () => {
+   const [input, setInputValue] = useState({
+     text: "",
+     number:  ""
+   })
+  const handleInputData = (e) => {
+        setInputValue({
+          ...input,
+          [e.target.name]: e.target.value
+        })
 
-  const [input, setInput] = useState({
-    number: "",
-    text: ""
-  })
-
-  const setInputValue = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // setInputValue(input)
-    console.log(input, 'nput')
+   console.log('newObjects', input)
+
+  const handleFormSubmit = (e) => {
+       e.preventDefault()
+      //  handleInputData(input)
   }
   return (
     <>
@@ -25,19 +25,31 @@ const AddTransaction = () => {
       <form>
         <div className="form-control">
           <label htmlFor="text">Text</label>
-          <input type="text" name='text' onChange={setInputValue} placeholder="Enter text..." />
+          <input
+            type="text"
+            name="text"
+            onChange={handleInputData}
+            placeholder="Enter text..."
+          />
         </div>
         <div className="form-control">
           <label htmlFor="amount">
             Amount <br />
             (negative - expense, positive - income)
           </label>
-          <input type="number" name='number' placeholder="Enter amount..." onChange= {setInputValue}/>
+          <input
+            type="number"
+            name="number"
+            placeholder="Enter amount..."
+            onChange={handleInputData}
+          />
         </div>
-        <button className="btn" onClick= {handleSubmit}>Add transaction</button>
+        <button className="btn" onClick={handleFormSubmit}>
+          Add transaction
+        </button>
       </form>
     </>
   );
 };
 
-export default AddTransaction;
+export default FormAddTransaction
