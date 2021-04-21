@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContex} from "react";
+import { v4 } from "uuid";
+import GlobalData from "../contextData"
+
 
 const FormAddTransaction = () => {
+
+  const contexData =  useContext(GlobalData)
+  const[incExcData, setincExcData] = contexData
+
    const [input, setInputValue] = useState({
      text: "",
      number:  ""
@@ -17,7 +24,13 @@ const FormAddTransaction = () => {
 
   const handleFormSubmit = (e) => {
        e.preventDefault()
-      //  handleInputData(input)
+       const newGlobalData = {
+         ...input,
+         id: v4()
+       }
+     
+       setincExcData([...incExcData,  newGlobalData ])
+
   }
   return (
     <>
