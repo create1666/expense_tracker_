@@ -1,37 +1,39 @@
-import React, { useState, useContex} from "react";
+import React, { useState, useContext } from "react";
 import { v4 } from "uuid";
-import GlobalData from "../contextData"
-
+import GlobalData from "../contextData";
 
 const FormAddTransaction = () => {
+  const contexData = useContext(GlobalData);
+  const [incExcData, setincExcData] = contexData;
 
-  const contexData =  useContext(GlobalData)
-  const[incExcData, setincExcData] = contexData
-
-   const [input, setInputValue] = useState({
-     text: "",
-     number:  ""
-   })
+  const initialFormInputState = {
+    text: "",
+    number: "",
+  };
+  const [input, setInputValue] = useState(initialFormInputState);
   const handleInputData = (e) => {
-        setInputValue({
-          ...input,
-          [e.target.name]: e.target.value
-        })
+    setInputValue({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-  }
-
-   console.log('newObjects', input)
+  console.log("newObjects", input);
 
   const handleFormSubmit = (e) => {
-       e.preventDefault()
-       const newGlobalData = {
-         ...input,
-         id: v4()
-       }
-     
-       setincExcData([...incExcData,  newGlobalData ])
+    e.preventDefault();
+    const newGlobalData = {
+      ...input,
+      id: v4(),
+    };
 
-  }
+    setincExcData([...incExcData, newGlobalData]);
+    setInputValue(initialFormInputState);
+    // set local storage
+    let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    transactions = [...transactions, newGlobalData];
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  };
   return (
     <>
       <h3>Add new transaction</h3>
@@ -65,4 +67,4 @@ const FormAddTransaction = () => {
   );
 };
 
-export default FormAddTransaction
+export default FormAddTransaction;

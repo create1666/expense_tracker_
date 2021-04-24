@@ -6,15 +6,19 @@ import Balance from "./components/Balance";
 import TransactionList from "./components/TransactionList";
 import IncomeExpenses from "./components/IncomeExpenses";
 import FormAddTransaction from "./components/AddTransaction";
-import GlobalData from "./ContextData";
+import GlobalData from "./contextData";
 import { useState } from "react";
 
 function App() {
-  const { provider } = GlobalData;
-  const [incExcData, setincExcData] = useState([]);
+  const { Provider } = GlobalData;
+  const data = JSON.parse(localStorage.getItem('transactions'))
+  const [incExcData, setincExcData] = useState(data || []);
+ 
+
+
   return (
     <>
-    <provider value = {[incExcData, setincExcData]}>
+    <Provider value = {[incExcData, setincExcData]}>
       <Header />
       <div className="container">
         <Balance />
@@ -22,7 +26,7 @@ function App() {
         <TransactionList />
         <FormAddTransaction />
       </div>
-      </provider>
+      </Provider>
     
     </>
   );
